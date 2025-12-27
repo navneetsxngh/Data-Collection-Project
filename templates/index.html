@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Science Student Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent: #4f46e5; --accent-light: #e0e7ff; }
+        body {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 24px 24px;
+            font-family: 'Inter', sans-serif;
+            color: #0f172a;
+        }
+        .pro-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+        }
+        .custom-input {
+            background: #ffffff;
+            font-weight: 600;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .custom-input:focus {
+            box-shadow: 0 0 0 4px var(--accent-light);
+            border-color: var(--accent);
+        }
+        .mono-id { font-family: 'JetBrains Mono', monospace; font-weight: 700; }
+        .col-label {
+            font-size: 11px; font-weight: 900; text-transform: uppercase;
+            letter-spacing: 0.15em; color: #334155; margin-bottom: 0.5rem;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-up { animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 md:p-8">
+
+    <div class="max-w-3xl w-full pro-card rounded-3xl overflow-hidden animate-up">
+        <div class="p-8 border-b border-slate-100 bg-slate-50/80">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-black text-slate-900 tracking-tight">Data Collection</h1>
+                    <p class="text-slate-500 text-sm mt-1 font-medium">Status: <span class="text-emerald-600 font-black uppercase text-[10px] tracking-widest">CSV Active</span></p>
+                </div>
+            </div>
+        </div>
+
+        <form id="dataForm" class="p-8 space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
+                <div class="input-group">
+                    <label class="col-label">Serial Identifier</label>
+                    <input type="text" id="studentId" name="studentId" readonly class="w-full px-4 py-3 bg-slate-100 border border-slate-200 rounded-xl outline-none mono-id text-indigo-700">
+                </div>
+                <div class="input-group">
+                    <label class="col-label">Full Name</label>
+                    <input type="text" name="fullName" required placeholder="Johnathan Doe" class="custom-input w-full px-4 py-3 border border-slate-300 rounded-xl text-slate-900 outline-none">
+                </div>
+                <div class="input-group">
+                    <label class="col-label">Contact Info</label>
+                    <input type="tel" name="phone" required placeholder="+1 (000) 000-0000" class="custom-input w-full px-4 py-3 border border-slate-300 rounded-xl text-slate-900 outline-none">
+                </div>
+                <div class="input-group">
+                    <label class="col-label">Email Address</label>
+                    <input type="email" name="email" required placeholder="user@domain.com" class="custom-input w-full px-4 py-3 border border-slate-300 rounded-xl text-slate-900 outline-none">
+                </div>
+                <div class="input-group">
+                    <label class="col-label">Monthly Income</label>
+                    <input type="number" name="income" required placeholder="USD 0.00" class="custom-input w-full px-4 py-3 border border-slate-300 rounded-xl text-slate-900 outline-none">
+                </div>
+                <div class="input-group">
+                    <label class="col-label">Current City</label>
+                    <input type="text" name="city" required placeholder="Ex: San Francisco" class="custom-input w-full px-4 py-3 border border-slate-300 rounded-xl text-slate-900 outline-none">
+                </div>
+                <div class="input-group">
+                    <label class="col-label">Main Asset</label>
+                    <input type="text" name="acquisition" required placeholder="Primary Hardware/Asset" class="custom-input w-full px-4 py-3 border border-slate-300 rounded-xl text-slate-900 outline-none">
+                </div>
+                <div class="input-group flex flex-col justify-center">
+                    <label class="col-label">Gender Classification</label>
+                    <div class="flex items-center gap-4 bg-slate-100 p-2 rounded-xl border border-slate-200 w-fit">
+                        <span class="text-xs text-slate-700 font-extrabold ml-2">Male</span>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" name="is_female" class="sr-only peer">
+                            <div class="w-11 h-6 bg-slate-300 rounded-full peer-checked:bg-indigo-600 after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full shadow-inner"></div>
+                        </label>
+                        <span class="text-xs text-slate-700 font-extrabold mr-2">Female</span>
+                    </div>
+                </div>
+                <div class="input-group md:col-span-2">
+                    <label class="col-label">Academic Sector</label>
+                    <select name="department" class="custom-input w-full px-4 py-3 border border-slate-300 rounded-xl text-slate-900 outline-none cursor-pointer">
+                        <option value="data-analytics">Data Analytics</option>
+                        <option value="machine-learning">Machine Learning</option>
+                        <option value="data-engineering">Data Infrastructure</option>
+                        <option value="physics">Physics</option>
+                        <option value="chemistry">Chemistry</option>
+                        <option value="mathematics">Mathematics</option>
+                        <option value="government-sector">Government Sector</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-black text-lg py-5 rounded-2xl shadow-xl transition-all transform hover:-translate-y-1 active:translate-y-0">
+                COMMIT ENTRY
+            </button>
+        </form>
+
+        <div id="successMessage" class="hidden p-16 text-center animate-up">
+            <div class="h-24 w-24 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-8 border-4 border-emerald-100 shadow-sm">
+                <svg class="h-12 w-12 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="4" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <h2 class="text-3xl font-black text-slate-900 tracking-tight">ENTRY SYNCHRONIZED</h2>
+            <p id="successDetail" class="text-slate-600 mt-3 font-semibold text-lg"></p>
+            <button onclick="resetForm()" class="mt-10 px-10 py-4 bg-slate-900 text-white hover:bg-black rounded-2xl transition-all font-black uppercase tracking-widest text-sm">
+                Initiate New Registry
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let nextId = 100;
+        const form = document.getElementById('dataForm');
+        const idInput = document.getElementById('studentId');
+        const successMessage = document.getElementById('successMessage');
+        const successDetail = document.getElementById('successDetail');
+
+        window.onload = () => idInput.value = `SR-${nextId}`;
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const rawData = Object.fromEntries(formData.entries());
+
+            const payload = {
+                studentId: idInput.value,
+                fullName: rawData.fullName,
+                phone: rawData.phone,
+                email: rawData.email,
+                income: rawData.income,
+                city: rawData.city,
+                acquisition: rawData.acquisition,
+                gender: rawData.is_female ? "Female" : "Male",
+                department: rawData.department
+            };
+
+            const response = await fetch("/submit", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                successDetail.textContent = `Record #${idInput.value} appended to CSV.`;
+                nextId++;
+                form.classList.add("hidden");
+                successMessage.classList.remove("hidden");
+            }
+        });
+
+        function resetForm() {
+            form.reset();
+            idInput.value = `SR-${nextId}`;
+            form.classList.remove("hidden");
+            successMessage.classList.add("hidden");
+        }
+    </script>
+</body>
+</html>
